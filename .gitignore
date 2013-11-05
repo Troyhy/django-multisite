@@ -9,3 +9,4 @@ eggs
 parts
 MANIFEST
 multisite/*.egg-info
+*.egg-info
