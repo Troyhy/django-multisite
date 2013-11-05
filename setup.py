@@ -1,4 +1,4 @@
-from distutils.core import setup
+from setuptools import setup, find_packages
 import os
 
 _dir_ = os.path.dirname(__file__)
