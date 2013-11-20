@@ -178,9 +178,6 @@ class DynamicSiteMiddleware(object):
 
     def site_domain_changed_hook(self, sender, instance, raw, *args, **kwargs):
         """Clears the cache if Site.domain has changed."""
-        if raw or instance.pk is None:
-            return
-
         original = getattr(instance, '_domain_cache', None)
         if original != instance.domain:
             self.cache.clear()
