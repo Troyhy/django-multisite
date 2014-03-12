@@ -116,6 +116,12 @@ class DictCache(object):
             raise KeyError(key)
         return result
 
+    def get(self, key):
+        try:
+            return self.__getitem__(key)
+        except KeyError:
+            return None
+
     def __setitem__(self, key, value):
         """x.__setitem__(i, y) <==> x[i]=y"""
         hash(key)               # Raise TypeError if unhashable
