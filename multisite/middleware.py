@@ -150,14 +150,17 @@ class DynamicSiteMiddleware(object):
         alias = self.get_alias(netloc)
 
         if alias is None:
-            # set default SITE_ID if set
-            try:
-                # Prefer the default SITE_ID
-                site_id = settings.SITE_ID.get_default()
-                alias = Alias.canonical.get(site=site_id)
-            except ValueError:
-                # Fallback to the first Site object
-                alias = Alias.canonical.order_by('site')[0]
+            force_fallback = getattr(settings, 'MULTISITE_FORCE_FALBACK_', False)
+            if not force_fallback:
+                # set default SITE_ID if set
+                try:
+                    # Prefer the default SITE_ID
+
+                    site_id = settings.SITE_ID.get_default()
+                    alias = Alias.canonical.get(site=site_id)
+                except ValueError:
+                    # Fallback to the first Site object
+                    alias = Alias.canonical.order_by('site')[0]
 
         # If default site does not work, then
         # Fallback using settings.MULTISITE_FALLBACK
