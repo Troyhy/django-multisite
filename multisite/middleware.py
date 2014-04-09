@@ -150,7 +150,7 @@ class DynamicSiteMiddleware(object):
         alias = self.get_alias(netloc)
 
         if alias is None:
-            force_fallback = getattr(settings, 'MULTISITE_FORCE_FALBACK_', False)
+            force_fallback = getattr(settings, 'MULTISITE_FORCE_FALLBACK', False)
             if not force_fallback:
                 # set default SITE_ID if set
                 try:
